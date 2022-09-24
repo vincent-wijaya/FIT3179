@@ -1,0 +1,55 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "COVID-19 Active Cases (10 Oct 2020)",
+    "width": 800,
+    "height": 400,
+    "projection": {"type": "equalEarth"},
+    "layer": [
+        {
+            "data": {
+            "url": "https://raw.githubusercontent.com/JiazhouLiu/FIT3179/main/VegaLite/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+            "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+            },
+            "mark": {"type": "geoshape",
+        "fill": "#eff9bd"}
+        },
+
+        {
+            "data": {
+            "url": "https://raw.githubusercontent.com/JiazhouLiu/FIT3179/main/VegaLite/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+            "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+            },
+            "transform": [
+            {
+                "lookup": "properties.NAME",
+                "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/JiazhouLiu/FIT3179/main/VegaLite/3_choropleth_map/data/covid_10_10_2020.csv"
+                },
+                "key": "Country",
+                "fields": ["Active",  "Confirmed", "Deaths", "Population"]
+                }
+            },
+            {"calculate": "datum.Confirmed/datum.Population * 10000", "as": "Confirmed per 10,000 population"}
+            ],
+            "mark": {"type": "geoshape"},
+            "encoding": {
+            "color": {
+                "field": "Confirmed per 10,000 population",
+                "type": "quantitative",
+                "scale": {
+                    "type": "log"
+                }
+        
+            },
+            "tooltip": [
+            {"field": "properties.NAME", "type": "nominal", "title":
+            "Country"},
+            {"field": "Confirmed", "type": "quantitative"},
+            {"field": "Confirmed per 10,000 population", "type": "quantitative", "format": ".2f"}
+            ]
+            
+            }
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+#circuitsMap {
+	top:100px;
+	bottom: 100px; 
+	left: 100px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+}
+
+.vis-container {
+    width: 100%;
+}
+
+@font-face {
+    font-family: "Formula1-Bold";
+    src: url("Formula1-Bold.otf");
+}
+
+.header {
+	font-family: "Formula1-Bold";
+	color: white;
+	background-color: #cf2d1e;
+	padding: 20px;
+	font-size: 20px;
+}
+
+/* color: #cf2d1e; */

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 400,
+  "title": "Circuits Formula 1 Raced On In Europe",
+  "projection": {"type": "equirectangular"},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2022,
+      "bind": {
+          "input": "range",
+          "min": 1950,
+          "max": 2022,
+          "step": 1,
+          "name": "Year: "
+      }
+    }   
+  ],
+  "layer": [
+    {
+      "mark": {"type": "rect", "fill":"aliceblue", "size": ""}
+    }
+    ,{
+      "data": {
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/Week%209%20Homework/data/ne_110m_eu.json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "black", "stroke": "white"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/Week%209%20Homework/data/ne_110m_eu.json",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_10"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "black"},
+      "encoding": {"opacity": {"value": 0.3}}
+    },
+    {
+      "data": 
+      {
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/Week%209%20Homework/data/races.csv",
+        "format": {
+          "type": "csv",
+          "parse": {"year": "number"}
+        }
+      },
+      "encoding": {
+        "longitude": {"field": "lng", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"}
+      },
+      "transform": [
+        {"lookup": "circuitId", "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/Week%209%20Homework/data/circuits.csv"
+          },
+          "key": "circuitId",
+          "fields":["lng", "lat", "country", "location"]
+        }
+        },
+        {"filter": "datum.lng >= -13 && datum.lng <= 48 && datum.lat >= 35 && datum.lat <= 73"},
+        {"filter": "datum.year == Year_selection"}
+      ],
+      "layer":[
+        {
+          "mark": {"type": "square", "tooltip": {"content": "data"}, "size": 11},
+          "encoding": {
+            "size": {"value": 15},
+            "color": {"value": "red"},
+            "opacity": {"value": 0.7},
+            "tooltip": [
+              {"field": "name", "type": "nominal", "title": "Circuit Name"},
+              {"field": "location", "type": "nominal", "title": "Location"},
+              {"field": "country", "type": "nominal", "title": "Country"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "dy": -12,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {"field": "location", "type": "nominal"},
+            "color": {"value": "red"},
+            "opacity": {"value": 1},
+            "tooltip": [
+              {"field": "name", "type": "nominal", "title": "Circuit Name"},
+              {"field": "location", "type": "nominal", "title": "Location"},
+              {"field": "country", "type": "nominal", "title": "Country"}
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
