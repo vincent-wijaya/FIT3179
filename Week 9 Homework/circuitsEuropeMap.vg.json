@@ -20,8 +20,8 @@
   "layer": [
     {
       "mark": {"type": "rect", "fill":"aliceblue", "size": ""}
-    }
-    ,{
+    },
+    {
       "data": {
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/ne_110m_eu.json",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
