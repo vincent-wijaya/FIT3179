@@ -1,7 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 900,
-  "height": 500,
+  "width": 700,
   "title": "Circuits Formula 1 Raced On" ,
   "projection": {"type": "naturalEarth1"},
   "params": [
@@ -30,7 +29,7 @@
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/ne_110m.json",
         "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
       },
-      "mark": {"type": "geoshape", "fill": null, "stroke": "black"},
+      "mark": {"type": "geoshape", "stroke": "black"},
       "encoding": {"opacity": {"value": 0.3}}
     },
     {

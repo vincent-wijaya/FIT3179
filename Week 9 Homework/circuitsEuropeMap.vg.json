@@ -1,7 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 600,
-  "height": 400,
   "title": "Circuits Formula 1 Raced On In Europe",
   "projection": {"type": "equirectangular"},
   "params": [
