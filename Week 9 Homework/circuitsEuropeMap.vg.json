@@ -26,14 +26,14 @@
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/ne_110m_eu.json",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
-      "mark": {"type": "geoshape", "fill": "black", "stroke": "white"}
+      "mark": {"type": "geoshape", "fill": "lightgrey", "stroke": "white"}
     },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/ne_110m_eu.json",
         "format": {"type": "topojson", "feature": "ne_110m_graticules_10"}
       },
-      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"},
+      "mark": {"type": "geoshape", "fill": null, "stroke": "black"},
       "encoding": {"opacity": {"value": 0.3}}
     },
     {
