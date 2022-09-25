@@ -1,8 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
+  "width": 800,
+  "height": 400,
   "title": "Circuits Formula 1 Raced On" ,
-  "projection": {"type": "naturalEarth1"},
+  "projection": {"type": "equalEarth"},
   "params": [
     {
       "name": "Year_selection",
@@ -85,7 +86,7 @@
           ],
           "encoding": {
             "text": {"field": "location", "type": "nominal"},
-            "color": {"value": "red"},
+            "color": {"value": "black"},
             "opacity": {"value": 0.8},
             "tooltip": [
               {"field": "name", "type": "nominal", "title": "Circuit Name"},
