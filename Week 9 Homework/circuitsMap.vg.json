@@ -30,7 +30,7 @@
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/ne_110m.json",
         "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
       },
-      "mark": {"type": "geoshape", "stroke": "lightgray", "fill": null},
+      "mark": {"type": "geoshape", "stroke": "black", "fill": null},
       "encoding": {"opacity": {"value": 0.3}}
     },
     {
