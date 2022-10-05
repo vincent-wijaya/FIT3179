@@ -2,7 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 800,
   "height": 500,
-  "title": "Circuits Formula 1 Raced On" ,
+  "title": {
+    "text": "Circuits Formula 1 Raced On",
+    "frame": "bounds"
+},
   "projection": {"type": "equalEarth"},
   "params": [
     {
@@ -18,16 +21,23 @@
     }   
   ],
   "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+          "format": {"type": "topojson", "feature": "oceans"}
+        },
+        "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/ne_110m_satellite.json",
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/ne_110m_satellite.json",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
       "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.7}
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/ne_110m.json",
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/ne_110m.json",
         "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
       },
       "mark": {"type": "geoshape", "stroke": "black", "fill": null},
@@ -36,7 +46,7 @@
     {
       "data": 
       {
-        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/races.csv",
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv",
         "format": {
           "type": "csv",
           "parse": {"year": "number"}
@@ -49,7 +59,7 @@
       "transform": [
         {"lookup": "circuitId", "from": {
           "data": {
-            "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Week%209%20Homework/data/circuits.csv",
+            "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/circuits.csv",
             "format":{
               "type": "csv",
               "parse": {"lng": "number", "lat": "number", "country": "string", "location": "string"}
