@@ -64,12 +64,12 @@
                 "op": "rank",
                 "as": "rank"
             }],
-            "groupby": ["round"]        
+            "groupby": ["raceId"]        
         }
     ],
     "mark": {"type": "line", "orient": "vertical"},
     "encoding": {
-        "x": {"field": "round", "type": "ordinal"},
+        "x": {"field": "raceId", "type": "ordinal"},
         "y": {"field": "rank", "type": "ordinal"},
         "color": {
             "field": "driverId", "type": "nominal",
