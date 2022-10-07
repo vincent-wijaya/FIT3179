@@ -12,6 +12,11 @@
 	right: 100px;
 } */
 
+
+* {
+	font-family: "Formula1-Bold";
+}
+
 .vis-container {
     width: 100%;
 }

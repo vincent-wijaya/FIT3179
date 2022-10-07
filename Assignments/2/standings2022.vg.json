@@ -4,11 +4,11 @@
     "params": [
       {
         "name": "Year_selection",
-        "value": 2022,
+        "value": 2021,
         "bind": {
             "input": "range",
             "min": 1950,
-            "max": 2022,
+            "max": 2021,
             "step": 1,
             "name": "Year: "
         }
@@ -33,7 +33,7 @@
         },
         {
             "sort": [
-                {"field": "position", "order": "descending"}
+                {"field": "points", "order": "descending"}
             ],
             "window": [{
                 "op": "rank",
@@ -46,7 +46,7 @@
     "mark": {"type": "line", "orient": "vertical"},
     "encoding": {
         "x": {"field": "round", "type": "ordinal"},
-        "y": {"field": "position", "type": "ordinal"},
+        "y": {"field": "rank", "type": "ordinal"},
         "color": {
             "field": "driverId", "type": "nominal",
             "scale": {
