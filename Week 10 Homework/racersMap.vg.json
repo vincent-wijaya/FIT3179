@@ -1,0 +1,68 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 900,
+    "height": 700,
+    "title": "Circuits Formula 1 Raced On In " ,
+    "projection": {"type": "naturalEarth1"},
+    "params": [
+      {
+          "name": "Year_selection",
+          "value": 2022,
+          "bind": {
+              "input": "range",
+              "min": 1950,
+              "max": 2022,
+              "step": 1,
+              "name": "Year: "
+          }
+      }   
+  
+    ],
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/Week%209%20Homework/data/ne_110m_satellite.json",
+          "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+        },
+        "mark": {"type": "geoshape", "fill": "black", "stroke": "white", "strokeWidth": 0.7}
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/Week%209%20Homework/data/data/ne_110m.json",
+          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "black"},
+        "encoding": {"opacity": {"value": 0.3}}
+      },
+      {
+        "data": 
+        {
+          "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/Week%209%20Homework/data/ne_110m.csv",
+          "format": {
+            "type": "topojson",
+            "feature": "ne_110m_admin_0_countries"
+          }
+        },
+        "transform": [
+            {
+                "lookup": "nationality",
+                "from": {
+                    "data": {
+                        "url": ""
+                    }
+                }
+            },
+            {
+                "lookup": "nationality",
+                "from": {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.csv"
+                    },
+                    "key": "nationality",
+                    "fields": ["en_short_name"]
+                },
+                "as": [""]
+        ]
+      }
+    ]
+  }

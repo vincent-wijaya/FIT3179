@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Bump chart",
+    "params": [
+      {
+        "name": "Year_selection",
+        "value": 2021,
+        "bind": {
+            "input": "range",
+            "min": 1950,
+            "max": 2021,
+            "step": 1,
+            "name": "Year: "
+        }
+      }   
+    ],
+    "data": {
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_standings.csv"
+    },
+    "transform": [
+        {
+            "lookup": "raceId", "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv",
+                    "format":{
+                        "type": "csv",
+                        "parse": {"year": "number", "round": "number"}
+                    }
+                },
+                "key": "raceId",
+                "fields":["year", "round"]
+            }
+        },
+        {
+            "sort": [
+                {"field": "points", "order": "descending"}
+            ],
+            "window": [{
+                "op": "rank",
+                "as": "rank"
+            }],
+            "groupby": ["raceId"]        
+        },
+        {"filter": "datum.year == 2021"}
+    ],
+    "mark": {"type": "line", "orient": "vertical"},
+    "encoding": {
+        "x": {"field": "round", "type": "ordinal"},
+        "y": {"field": "rank", "type": "ordinal"},
+        "color": {
+            "field": "driverId", "type": "nominal",
+            "scale": {
+                
+            }
+        }
+    }
+}
+
+

@@ -1,13 +1,90 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "description": "World Driver's Champions",
+    "params": 
+    [
+        {
+            "name": "min_year_selection",
+            "value": 1950,
+            "bind": {
+                "input": "range",
+                "min": 1950,
+                "max": 2022,
+                "step": 1,
+                "name": "Min Year: "
+            }
+        },
+        {
+            "name": "max_year_selection",
+            "value": 2022,
+            "bind": {
+                "input": "range",
+                "min": 1950,
+                "max": 2022,
+                "step": 1,
+                "name": "Max Year: "
+            }
+        },
+        {
+            "name": "highlight",
+            "select": {"type": "point", "on": "mouseover", "fields": ["Driver"]},
+            "bind": "legend"
+        },
+        {"name": "select", "select": "point"}
+    ],
     "data": {
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_championships.csv"
-
     },
-    "mark": {"type": "arc", "innerRadius": 50},
-    "encoding": {
-      "theta": {"field": "Titles", "type": "quantitative"},
-      "color": {"field": "Driver", "type": "nominal"}
-    }
-  }
+    "transform": [
+        {"filter": "datum.Season >= min_year_selection && datum.Season <= max_year_selection" },
+        {
+            "aggregate": [{"op": "count", "field": "Driver", "as": "Titles"}],
+            "groupby": ["Driver"]
+        }
+    ],
+    "layer": [
+        {
+            "mark": {
+                "type": "arc", 
+                "innerRadius": 50,
+                "stroke": "black",
+                "cursor": "pointer"
+            },
+            "encoding": {
+                "theta": {"field": "Titles", "type": "quantitative"},
+                "color": {"field": "Driver", "type": "nominal"},
+                "tooltip": [
+                    {"field": "Driver", "type": "nominal", "title": "Driver"},
+                    {"field": "Titles", "type": "quantitative", "title": "Titles"}
+                ],
+                "opacity": {
+                    "condition": [
+                        {"param": "select", "value": 0.8},
+                        {"param": "highlight", "value": 0.8}],
+                    "value": 0.2
+                },
+                "strokeWidth": {
+                    "condition": [
+                        {
+                            "param": "select",
+                            "empty": false,
+                            "value": 2
+                        },
+                        {
+                            "param": "highlight",
+                            "empty": false,
+                            "value": 1
+                        }
+                    ],
+                    "value": 0
+                },
+                "config": {
+                    "scale": {
+                        "bandPaddingInner": 0.2
+                    }
+                }
+            }
+        }
+    ]
+    
+}

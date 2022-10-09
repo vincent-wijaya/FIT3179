@@ -1,0 +1,88 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Bump chart",
+    "params": [
+      {
+        "name": "Year_selection",
+        "value": 2021,
+        "bind": {
+            "input": "range",
+            "min": 1950,
+            "max": 2021,
+            "step": 1,
+            "name": "Year: "
+        }
+      },
+      {
+        "name": "driver_highlight",
+        "select": {"type": "point", "fields": ["driverId"]},
+        "bind": "legend"
+      }   
+    ],
+    "data": {
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum.year == Year_selection"
+        },
+        {
+            "lookup": "raceId", "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_standings.csv",
+                    "format": {
+                        "type": "csv",
+                        "parse": {"position": "number", "driverId": "number"}
+                    }
+                },
+                "key": "raceId",
+                "fields":["position", "driverId"]
+            }
+        },
+        {
+            "lookup": "driverId", "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv",
+                    "format": {
+                        "type": "csv",
+                        "parse": {"forename": "string", "surname": "string"}
+                    }
+                },
+                "key": "driverId",
+                "fields": ["forename", "surname"]
+            }
+        },
+        {
+            "calculate": "datum.forename + ' ' + datum.surname", "as": "driver_fullname"
+        },
+        {
+            "sort": [
+                {"field": "points", "order": "descending"},
+                {"field": "wins", "order": "descending"}
+            ],
+            "window": [{
+                "op": "rank",
+                "as": "rank"
+            }],
+            "groupby": ["raceId"]        
+        }
+    ],
+    "mark": {"type": "line", "orient": "vertical"},
+    "encoding": {
+        "x": {"field": "round", "type": "ordinal"},
+        "y": {"field": "position", "type": "ordinal"},
+        "color": {
+            "field": "driverId", "type": "nominal",
+            "scale": {
+                
+            }
+        },
+        "opacity": {
+            "condition": {"param": "driver_highlight", "value": 0.6},
+            "value": 0.2
+        }
+
+    }
+}
+
+
