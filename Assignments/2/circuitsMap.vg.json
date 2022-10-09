@@ -1,12 +1,11 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 800,
     "height": 500,
     "title": {
         "text": "Circuits Formula 1 Raced On",
         "frame": "bounds"
     },
-    "autosize": "none",
     "params": 
     [
         {
@@ -22,10 +21,10 @@
         },
         {
             "name": "zoom_level",
-            "value": 130,
+            "value": 140,
             "bind": {
                 "input": "range",
-                "min": 130,
+                "min": 140,
                 "max": 1500,
                 "step": 10,
                 "name": "Zoom: "
@@ -47,103 +46,32 @@
             } 
         }  
     ],
-    "signals": 
-    [
-        { "name": "tx", "update": "width / 2" },
-        { "name": "ty", "update": "height / 2" },
-        {
-            "name": "scale",
-            "value": 150,
-            "on": [{
-                "events": {"type": "wheel", "consume": true},
-                "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)"
-          }]
-        },
-        {
-            "name": "angles",
-            "value": [0, 0],
-            "on": [{
-                "events": "mousedown",
-                "update": "[rotateX, centerY]"
-            }]
-        },
-        {
-            "name": "cloned",
-            "value": null,
-            "on": [{
-                "events": "mousedown",
-                "update": "copy('projection')"
-            }]
-        },
-        {
-            "name": "start",
-            "value": null,
-            "on": [{
-                "events": "mousedown",
-                "update": "invert(cloned, xy())"
-            }]
-        },
-        {
-            "name": "drag", "value": null,
-            "on": [{
-                "events": "[mousedown, window:mouseup] > window:mousemove",
-                "update": "invert(cloned, xy())"
-            }]
-        },
-        {
-            "name": "delta", "value": null,
-            "on": [{
-                "events": {"signal": "drag"},
-                "update": "[drag[0] - start[0], start[1] - drag[1]]"
-            }]
-        },
-        {
-            "name": "rotateX", "value": 0,
-            "on": [{
-                "events": {"signal": "delta"},
-                "update": "angles[0] + delta[0]"
-            }]
-        },
-        {
-            "name": "centerY", "value": 0,
-            "on": [{
-                "events": {"signal": "delta"},
-                "update": "clamp(angles[1] + delta[1], -60, 60)"
-            }]
-        }
-    ],
-    
-    "projections": [
-        {
-            "name": "projection",
-            "type": "mercator",
-            "scale": {"signal": "scale"},
-            "rotate": [{"signal": "rotateX"}, 0, 0],
-            "center": [0, {"signal": "centerY"}],
-            "translate": [{"signal": "tx"}, {"signal": "ty"}]
-        }
-    ],
+    "projection": {
+        "type": "equalEarth",
+        "center": {"expr": "center_to"},
+        "scale": {"expr": "zoom_level"}
+    },
     "layer": [
         {
             "data": {
                 "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
                 "format": {"type": "topojson", "feature": "oceans"}
             },
-            "mark": {"type": "geoshape", "projection": "projection", "fill": "skyblue"}
+            "mark": {"type": "geoshape", "fill": "skyblue"}
         },
         {
             "data": {
                 "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/ne_110m_satellite.json",
                 "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
             },
-            "mark": {"type": "geoshape", "projection": "projection", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.7}
+            "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.7}
         },
         {
             "data": {
                 "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/ne_110m.json",
                 "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
             },
-            "mark": {"type": "geoshape", "projection": "projection", "stroke": "black", "fill": null},
+            "mark": {"type": "geoshape", "stroke": "black", "fill": null},
             "encoding": {"opacity": {"value": 0.3}}
         },
         {
@@ -201,7 +129,7 @@
                     "encoding": {
                         "text": {"field": "location", "type": "nominal"},
                         "color": {"value": "black"},
-                        "opacity": {"value": 0.8},
+                        "opacity": {"value": 0.6},
                         "tooltip": [
                             {"field": "name", "type": "nominal", "title": "Circuit Name"},
                             {"field": "location", "type": "nominal", "title": "Location"},
