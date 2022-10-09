@@ -1,0 +1,13 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "World Driver's Champions",
+    "data": {
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_championships.csv"
+
+    },
+    "mark": {"type": "arc", "innerRadius": 50},
+    "encoding": {
+      "theta": {"field": "Titles", "type": "quantitative"},
+      "color": {"field": "Driver", "type": "nominal"}
+    }
+  }
