@@ -1,35 +1,74 @@
-﻿Driver,Titles,Season(s)
-Michael Schumacher,7,"1994, 1995, 2000, 2001, 2002, 2003, 2004"
- Lewis Hamilton,7,"2008, 2014, 2015, 2017, 2018, 2019, 2020"
- Juan Manuel Fangio,5,"1951, 1954, 1955, 1956, 1957"
- Alain Prost,4,"1985, 1986, 1989, 1993"
- Sebastian Vettel,4,"2010, 2011, 2012, 2013"
- Jack Brabham,3,"1959, 1960, 1966"
- Jackie Stewart,3,"1969, 1971, 1973"
- Niki Lauda,3,"1975, 1977, 1984"
- Nelson Piquet,3,"1981, 1983, 1987"
- Ayrton Senna,3,"1988, 1990, 1991"
- Alberto Ascari,2,"1952, 1953"
- Graham Hill,2,"1962, 1968"
- Jim Clark,2,"1963, 1965"
- Emerson Fittipaldi,2,"1972, 1974"
- Mika Häkkinen,2,"1998, 1999"
- Fernando Alonso,2,"2005, 2006"
- Max Verstappen,2,"2021, 2022"
- Giuseppe Farina,1,1950
- Mike Hawthorn,1,1958
- Phil Hill,1,1961
- John Surtees,1,1964
- Denny Hulme,1,1967
- Jochen Rindt,1,1970
- James Hunt,1,1976
- Mario Andretti,1,1978
- Jody Scheckter,1,1979
- Alan Jones,1,1980
- Keke Rosberg,1,1982
- Nigel Mansell,1,1992
- Damon Hill,1,1996
- Jacques Villeneuve,1,1997
- Kimi Räikkönen,1,2007
- Jenson Button,1,2009
- Nico Rosberg,1,2016
+﻿Season,Driver,,,,,,,,,,,,,,
+1950, Giuseppe Farina,,,,,,,,,,,,,,
+1951, Juan Manuel Fangio,,,,,,,,,,,,,,
+1952, Alberto Ascari,,,,,,,,,,,,,,
+1953, Alberto Ascari,,,,,,,,,,,,,,
+1954, Juan Manuel Fangio,,,,,,,,,,,,,,
+1955, Juan Manuel Fangio,,,,,,,,,,,,,,
+1956, Juan Manuel Fangio,,,,,,,,,,,,,,
+1957, Juan Manuel Fangio,,,,,,,,,,,,,,
+1958, Mike Hawthorn,,,,,,,,,,,,,,
+1959, Jack Brabham,,,,,,,,,,,,,,
+1960, Jack Brabham,,,,,,,,,,,,,,
+1961, Phil Hill,,,,,,,,,,,,,,
+1962, Graham Hill,,,,,,,,,,,,,,
+1963, Jim Clark,,,,,,,,,,,,,,
+1964, John Surtees,,,,,,,,,,,,,,
+1965, Jim Clark,,,,,,,,,,,,,,
+1966, Jack Brabham,,,,,,,,,,,,,,
+1967, Denny Hulme,,,,,,,,,,,,,,
+1968, Graham Hill,,,,,,,,,,,,,,
+1969, Jackie Stewart,,,,,,,,,,,,,,
+1970, Jochen Rindt,,,,,,,,,,,,,,
+1971, Jackie Stewart,,,,,,,,,,,,,,
+1972, Emerson Fittipaldi,,,,,,,,,,,,,,
+1973, Jackie Stewart,,,,,,,,,,,,,,
+1974, Emerson Fittipaldi,,,,,,,,,,,,,,
+1975, Niki Lauda,,,,,,,,,,,,,,
+1976, James Hunt,,,,,,,,,,,,,,
+1977, Niki Lauda,,,,,,,,,,,,,,
+1978, Mario Andretti,,,,,,,,,,,,,,
+1979, Jody Scheckter,,,,,,,,,,,,,,
+1980, Alan Jones,,,,,,,,,,,,,,
+1981, Nelson Piquet,,,,,,,,,,,,,,
+1982, Keke Rosberg,,,,,,,,,,,,,,
+1983, Nelson Piquet,,,,,,,,,,,,,,
+1984, Niki Lauda,,,,,,,,,,,,,,
+1985, Alain Prost,,,,,,,,,,,,,,
+1986, Alain Prost,,,,,,,,,,,,,,
+1987, Nelson Piquet,,,,,,,,,,,,,,
+1988, Ayrton Senna,,,,,,,,,,,,,,
+1989, Alain Prost,,,,,,,,,,,,,,
+1990, Ayrton Senna,,,,,,,,,,,,,,
+1991, Ayrton Senna,,,,,,,,,,,,,,
+1992, Nigel Mansell,,,,,,,,,,,,,,
+1993, Alain Prost,,,,,,,,,,,,,,
+1994, Michael Schumacher,,,,,,,,,,,,,,
+1995, Michael Schumacher,,,,,,,,,,,,,,
+1996, Damon Hill,,,,,,,,,,,,,,
+1997, Jacques Villeneuve,,,,,,,,,,,,,,
+1998, Mika Häkkinen,,,,,,,,,,,,,,
+1999, Mika Häkkinen,,,,,,,,,,,,,,
+2000, Michael Schumacher,,,,,,,,,,,,,,
+2001, Michael Schumacher,,,,,,,,,,,,,,
+2002, Michael Schumacher,,,,,,,,,,,,,,
+2003, Michael Schumacher,,,,,,,,,,,,,,
+2004, Michael Schumacher,,,,,,,,,,,,,,
+2005, Fernando Alonso,,,,,,,,,,,,,,
+2006, Fernando Alonso,,,,,,,,,,,,,,
+2007, Kimi Räikkönen,,,,,,,,,,,,,,
+2008, Lewis Hamilton,,,,,,,,,,,,,,
+2009, Jenson Button,,,,,,,,,,,,,,
+2010, Sebastian Vettel,,,,,,,,,,,,,,
+2011, Sebastian Vettel,,,,,,,,,,,,,,
+2012, Sebastian Vettel,,,,,,,,,,,,,,
+2013, Sebastian Vettel,,,,,,,,,,,,,,
+2014, Lewis Hamilton,,,,,,,,,,,,,,
+2015, Lewis Hamilton,,,,,,,,,,,,,,
+2016, Nico Rosberg,,,,,,,,,,,,,,
+2017, Lewis Hamilton,,,,,,,,,,,,,,
+2018, Lewis Hamilton,,,,,,,,,,,,,,
+2019, Lewis Hamilton,,,,,,,,,,,,,,
+2020, Lewis Hamilton,,,,,,,,,,,,,,
+2021, Max Verstappen,,,,,,,,,,,,,,
+2022, Max Verstappen,,,,,,,,,,,,,,
