@@ -17,8 +17,18 @@
 	font-family: "Formula1-Bold";
 }
 
+/* body {
+} */
+
+.wrapper {
+	width: 800px;
+	margin: 0 auto;
+	background-color:whitesmoke
+}
+
 .vis-container {
     width: 100%;
+	margin: 2px;
 }
 
 @font-face {

@@ -1,6 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "World Driver's Champions",
+    "title": "World Driver's Champions",
+    "width": 400,
+    "height": 400,
     "params": 
     [
         {
@@ -59,7 +61,7 @@
                 ],
                 "opacity": {
                     "condition": [
-                        {"param": "select", "value": 0.8},
+                        {"param": "select", "empty": false, "value": 0.8},
                         {"param": "highlight", "value": 0.8}],
                     "value": 0.2
                 },

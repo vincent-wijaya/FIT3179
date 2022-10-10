@@ -1,6 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "description": "Bump chart",
+    "width": 300,
+    "height": 300,
     "params": [
       {
         "name": "Year_selection",
@@ -15,34 +17,34 @@
       },
       {
         "name": "driver_highlight",
-        "select": {"type": "point", "fields": ["driverId"]},
+        "select": {"type": "point", "fields": ["driver_fullname"]},
         "bind": "legend"
       }   
     ],
     "data": {
-        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv"
+        "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_standings.csv"
     },
     "transform": [
+        {
+            "lookup": "raceId", "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv",
+                    "format": {
+                        "type": "csv",
+                        "parse": {"year": "number", "round": "number"}
+                    }
+                },
+                "key": "raceId",
+                "fields":["year", "round"]
+            }
+        },
         {
             "filter": "datum.year == Year_selection"
         },
         {
-            "lookup": "raceId", "from": {
-                "data": {
-                    "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_standings.csv",
-                    "format": {
-                        "type": "csv",
-                        "parse": {"position": "number", "driverId": "number"}
-                    }
-                },
-                "key": "raceId",
-                "fields":["position", "driverId"]
-            }
-        },
-        {
             "lookup": "driverId", "from": {
                 "data": {
-                    "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv",
+                    "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/drivers.csv",
                     "format": {
                         "type": "csv",
                         "parse": {"forename": "string", "surname": "string"}
@@ -65,18 +67,25 @@
                 "as": "rank"
             }],
             "groupby": ["raceId"]        
+        },
+        {
+            "calculate": "toNumber(datum.round)", "as": "Round"
+        },
+        {
+            "calculate": "toNumber(datum.position)", "as": "Position"
         }
     ],
     "mark": {"type": "line", "orient": "vertical"},
     "encoding": {
-        "x": {"field": "round", "type": "ordinal"},
-        "y": {"field": "position", "type": "ordinal"},
+        "x": {"field": "Round", "type": "ordinal"},
+        "y": {"field": "Position", "type": "ordinal"},
         "color": {
-            "field": "driverId", "type": "nominal",
+            "field": "driver_fullname", "type": "nominal",
             "scale": {
                 
             }
         },
+        
         "opacity": {
             "condition": {"param": "driver_highlight", "value": 0.6},
             "value": 0.2
