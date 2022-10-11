@@ -1,0 +1,144 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "params": 
+    [
+        {
+            "name": "min_year_selection",
+            "value": 1950,
+            "bind": {
+                "input": "range",
+                "min": 1950,
+                "max": 2022,
+                "step": 1,
+                "name": "Min Year: "
+            }
+        },
+        {
+            "name": "max_year_selection",
+            "value": 2022,
+            "bind": {
+                "input": "range",
+                "min": 1950,
+                "max": 2022,
+                "step": 1,
+                "name": "Max Year: "
+            }
+        },
+        {
+            "name": "highlight",
+            "select": {"type": "point", "on": "mouseover", "fields": ["Driver"]},
+            "bind": "legend"
+        },
+        {"name": "select", "select": "point"}
+    ],
+    "hconcat": [
+        {
+            "title": "World Driver's Champions",
+            "width": 400,
+            "height": 400,
+            "data": {
+                "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/championships.csv"
+            },
+            "transform": [
+                {"filter": "datum.Season >= min_year_selection && datum.Season <= max_year_selection" },
+                {
+                    "aggregate": [{"op": "count", "field": "Driver", "as": "Driver Titles"}],
+                    "groupby": ["Driver"]
+                }
+            ],
+            "layer": [
+                {
+                    "mark": {
+                        "type": "arc", 
+                        "innerRadius": 50,
+                        "stroke": "black",
+                        "cursor": "pointer"
+                    },
+                    "encoding": {
+                        "theta": {"field": "Titles", "type": "quantitative"},
+                        "color": {"field": "Driver", "type": "nominal"},
+                        "tooltip": [
+                            {"field": "Driver", "type": "nominal", "title": "Driver"},
+                            {"field": "Titles", "type": "quantitative", "title": "Driver Titles"}
+                        ],
+                        "opacity": {
+                            "condition": [
+                                {"param": "select", "empty": false, "value": 0.8},
+                                {"param": "highlight", "value": 0.8}],
+                            "value": 0.2
+                        },
+                        "strokeWidth": {
+                            "condition": [
+                                {
+                                    "param": "select",
+                                    "empty": false,
+                                    "value": 2
+                                },
+                                {
+                                    "param": "highlight",
+                                    "empty": false,
+                                    "value": 1
+                                }
+                            ],
+                            "value": 0
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Constructor Champions",
+            "width": 400,
+            "height": 400,
+            "data": {
+                "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/championships.csv"
+            },
+            "transform": [
+                {"filter": "datum.Season >= min_year_selection && datum.Season <= max_year_selection" },
+                {
+                    "aggregate": [{"op": "count", "field": "Constructor", "as": "Constructor Titles"}],
+                    "groupby": ["Constructor"]
+                }
+            ],
+            "layer": [
+                {
+                    "mark": {
+                        "type": "arc", 
+                        "innerRadius": 50,
+                        "stroke": "black",
+                        "cursor": "pointer"
+                    },
+                    "encoding": {
+                        "theta": {"field": "Titles", "type": "quantitative"},
+                        "color": {"field": "Driver", "type": "nominal"},
+                        "tooltip": [
+                            {"field": "Constructor", "type": "nominal", "title": "Driver"},
+                            {"field": "Constructor Titles", "type": "quantitative", "title": "Titles"}
+                        ],
+                        "opacity": {
+                            "condition": [
+                                {"param": "select", "empty": false, "value": 0.8},
+                                {"param": "highlight", "value": 0.8}],
+                            "value": 0.2
+                        },
+                        "strokeWidth": {
+                            "condition": [
+                                {
+                                    "param": "select",
+                                    "empty": false,
+                                    "value": 2
+                                },
+                                {
+                                    "param": "highlight",
+                                    "empty": false,
+                                    "value": 1
+                                }
+                            ],
+                            "value": 0
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

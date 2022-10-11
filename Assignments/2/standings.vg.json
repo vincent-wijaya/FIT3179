@@ -4,22 +4,25 @@
     "width": 300,
     "height": 300,
     "params": [
-      {
-        "name": "Year_selection",
-        "value": 2021,
-        "bind": {
-            "input": "range",
-            "min": 1950,
-            "max": 2021,
-            "step": 1,
-            "name": "Year: "
-        }
-      },
-      {
-        "name": "driver_highlight",
-        "select": {"type": "point", "fields": ["driver_fullname"]},
-        "bind": "legend"
-      }   
+        {
+            "name": "Year_selection",
+            "value": 2021,
+            "bind": {
+                "input": "range",
+                "min": 1950,
+                "max": 2021,
+                "step": 1,
+                "name": "Year: "
+            }
+        },
+        {
+            "name": "highlight",
+            "select": {"type": "point", "on": "mouseover", "fields": ["driver_fullname"]},
+            "bind": "legend"
+        },
+        {
+            "name": "select", "select": "point"
+        }   
     ],
     "data": {
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_standings.csv"
@@ -75,21 +78,39 @@
             "calculate": "toNumber(datum.position)", "as": "Position"
         }
     ],
-    "mark": {"type": "line", "orient": "vertical"},
+    "mark": {"type": "line", "orient": "vertical", "cornerRadius": 2},
     "encoding": {
         "x": {"field": "Round", "type": "ordinal"},
         "y": {"field": "Position", "type": "ordinal"},
         "color": {
-            "field": "driver_fullname", "type": "nominal",
-            "scale": {
-                
-            }
+            "field": "driver_fullname", "type": "nominal"
+        },
+
+        "strokeWidth": {
+            "condition": [
+                {
+                    "param": "select",
+                    "empty": false,
+                    "value": 3
+                },
+                {
+                    "param": "highlight",
+                    "empty": false,
+                    "value": 3
+                }
+            ],
+            "value": 1.5
         },
         
         "opacity": {
-            "condition": {"param": "driver_highlight", "value": 0.6},
+            "condition": {"param": "highlight", "value": 0.6},
             "value": 0.2
-        }
+        },
+        "tooltip": [
+            {"field": "driver_fullname", "type": "nominal", "title": "Driver"},
+            {"field": "Position", "type": "ordinal", "title": "Position"},
+            {"field": "points", "type": "quantitative", "title": "Points"}
+        ]
 
     }
 }
