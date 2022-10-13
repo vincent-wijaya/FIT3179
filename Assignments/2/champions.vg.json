@@ -23,12 +23,7 @@
                 "step": 1,
                 "name": "Max Year: "
             }
-        },
-        {
-            "name": "highlight",
-            "select": {"type": "point", "on": "mouseover", "fields": ["Driver"]}
-        },
-        {"name": "select", "select": "point"}
+        }
     ],
     "hconcat": [
         {
@@ -60,15 +55,26 @@
             ],
             "layer": [
                 {
+                    "params": [
+                        {
+                            "name": "highlight",
+                            "select": {"type": "point", "on": "mouseover", "fields": ["Driver"]}
+                        },
+                        {
+                            "name": "select", "select": "point"
+                        }
+                    ],
+                    "name": "Driver donut",
                     "mark": {
                         "type": "arc", 
                         "innerRadius": 100,
+                        "outerRadius": 200,
                         "stroke": "black",
                         "cursor": "pointer"
                     },
                     "encoding": {
-                        "theta": {"field": "Driver Titles", "type": "quantitative"},
-                        "color": {"field": "Driver", "type": "nominal"},
+                        "theta": {"field": "Driver Titles", "type": "quantitative", "stack": true},
+                        "color": {"field": "Driver", "type": "nominal", "stack": true},
                         "tooltip": [
                             {"field": "Driver", "type": "nominal", "title": "Driver"},
                             {"field": "Driver Titles", "type": "quantitative", "title": "Driver Titles"}
@@ -93,8 +99,22 @@
                                 }
                             ],
                             "value": 0
+                        }
+                    }
+                },
+                {
+                    "name": "Driver label",
+                    "mark": {
+                        "type": "text",
+                        "radius": 170
+                    },
+                    "encoding": {
+                        "theta": {
+                            "field": "Driver Titles", "type": "quantitative"
                         },
-                        "legend": null
+                        "text": {
+                            "field": "Driver Titles", "type": "quantitative"
+                        }
                     }
                 }
             ]
@@ -108,7 +128,7 @@
             },
             "transform": [
                 {"filter": "datum.Season >= min_year_selection && datum.Season <= max_year_selection" },
-                {"filter": "datum.Constructor != null"},
+                {"filter": "isValid(datum.Constructor)"},
                 {
                     "aggregate": [{"op": "count", "field": "Constructor", "as": "Constructor Titles"}],
                     "groupby": ["Constructor"]
@@ -116,15 +136,25 @@
             ],
             "layer": [
                 {
+                    "params": [
+                        {
+                            "name": "highlight",
+                            "select": {"type": "point", "on": "mouseover", "fields": ["Constructor"]}
+                        },
+                        {
+                            "name": "select", "select": "point"
+                        }   
+                    ],
+                    "name": "Constructor donut",
                     "mark": {
                         "type": "arc", 
                         "innerRadius": 100,
-                        "stroke": "black",
+                        "stroke": "white",
                         "cursor": "pointer"
                     },
                     "encoding": {
-                        "theta": {"field": "Constructor Titles", "type": "quantitative"},
-                        "color": {"field": "Constructor", "type": "nominal"},
+                        "theta": {"field": "Constructor Titles", "type": "quantitative", "stack": true},
+                        "color": {"field": "Constructor", "type": "nominal", "stack": true},
                         "tooltip": [
                             {"field": "Constructor", "type": "nominal", "title": "Constructor"},
                             {"field": "Constructor Titles", "type": "quantitative", "title": "Titles"}
@@ -149,14 +179,29 @@
                                 }
                             ],
                             "value": 0
-                        },
-                        "legend": null
+                        }
+                    }
+                },
+                {
+                    "name": "Constructor label",
+                    "mark": {
+                        "type": "text",
+                        "radiusOffset": 10
+                    },
+                    "encoding": {
+                        "text": {
+                            "field": "Constructor Titles", "type": "quantitative"
+                        }
                     }
                 }
             ]
         }
     ],
     "config": {
-        "title": {"font": "Formula1-Bold" }
+        "title": {"font": "Formula1-Bold" },
+        "legend": {
+            "disable": true
+        },
+        "mark": {"invalid": null}
     }
 }

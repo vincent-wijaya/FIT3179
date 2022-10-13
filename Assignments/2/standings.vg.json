@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "Driver Standings Season Summary",
-    "width": 300,
+    "width": 600,
     "height": 300,
     "params": [
         {
@@ -14,15 +14,7 @@
                 "step": 1,
                 "name": "Year: "
             }
-        },
-        {
-            "name": "highlight",
-            "select": {"type": "point", "on": "mouseover", "fields": ["driver_fullname"]},
-            "bind": "legend"
-        },
-        {
-            "name": "select", "select": "point"
-        }   
+        }
     ],
     "data": {
         "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/driver_standings.csv"
@@ -58,7 +50,7 @@
             }
         },
         {
-            "calculate": "fullname", "as": "Driver"
+            "calculate": "datum.fullname", "as": "Driver"
         },
         {
             "sort": [
@@ -78,42 +70,120 @@
             "calculate": "toNumber(datum.position)", "as": "Position"
         }
     ],
-    "mark": {"type": "line", "orient": "vertical", "cornerRadius": 6 },
-    "encoding": {
-        "x": {"field": "Round", "type": "ordinal"},
-        "y": {"field": "Position", "type": "ordinal"},
-        "color": {
-            "field": "Driver", "type": "nominal"
-        },
-
-        "strokeWidth": {
-            "condition": [
+    "layer": [
+        {
+            "params": [
                 {
-                    "param": "select",
-                    "empty": false,
-                    "value": 3
-                },
-                {
-                    "param": "highlight",
-                    "empty": false,
-                    "value": 3
+                    "name": "select", 
+                    "select": {
+                        "type": "point",
+                        "on": "click",
+                        "fields":["Driver"]
+                    },
+                    "bind": "legend"
                 }
             ],
-            "value": 1.5
+            "mark": {"type": "circle"},
+            "encoding": {
+                "x": 
+                {
+                    "field": "Round", 
+                    "type": "ordinal", 
+                    "axis": 
+                    {
+                        "domain": false, 
+                        "ticks": false, 
+                        "labelPadding": 10
+                    }
+                },
+                "y": 
+                {
+                    "field": "Position", 
+                    "type": "ordinal", 
+                    "axis": 
+                    {
+                        "domain": false, 
+                        "ticks": false, 
+                        "labelPadding": 10
+                    }
+                },
+                "color": {
+                    "field": "Driver", "type": "nominal"
+                },
+                "strokeWidth": {
+                    "condition": [
+                        {
+                            "param": "select",
+                            "empty": false,
+                            "value": 3
+                        }
+                    ],
+                    "value": 1
+                },
+                "opacity": {
+                    "condition": 
+                    {
+                        "param": "select",
+                        "value": 1
+                    },
+                    "value": 0.2
+                },
+                "size": {
+                    "condition":
+                    {
+                        "param": "select",
+                        "empty": false,
+                        "value": 50
+                    },
+                    "value": 20
+                },
+                "tooltip": [
+                    {"field": "Driver", "type": "nominal", "title": "Driver"},
+                    {"field": "Position", "type": "ordinal", "title": "Position"},
+                    {"field": "points", "type": "quantitative", "title": "Points"}
+                ]
+            }
         },
-        
-        "opacity": {
-            "condition": {"param": "highlight", "value": 0.8},
-            "value": 0.2
-        },
-        "tooltip": [
-            {"field": "Driver", "type": "nominal", "title": "Driver"},
-            {"field": "Position", "type": "ordinal", "title": "Position"},
-            {"field": "points", "type": "quantitative", "title": "Points"}
-        ]
-    },
+        {
+            "mark": {"type": "line", "orient": "vertical", "interpolate": "monotone"},
+            "encoding": {
+                "x": {"field": "Round", "type": "ordinal"},
+                "y": {"field": "Position", "type": "ordinal"},
+                "color": {
+                    "field": "Driver", "type": "nominal"
+                },
+                "strokeWidth": {
+                    "condition": [
+                        {
+                            "param": "select",
+                            "empty": false,
+                            "value": 4
+                        }
+                    ],
+                    "value": 2
+                },
+                "opacity": {
+                    "condition": 
+                    {
+                        "param": "select",
+                        "empty": false,
+                        "value": 1
+                    },
+                    "value": 0.2
+                },
+                "tooltip": [
+                    {"field": "Driver", "type": "nominal", "title": "Driver"},
+                    {"field": "Position", "type": "ordinal", "title": "Position"},
+                    {"field": "points", "type": "quantitative", "title": "Points"}
+                ]
+            }
+        }
+    ],
     "config": {
-        "title": {"font": "Formula1-Bold" }
+        "title": {"font": "Formula1-Bold" },
+        "text": {"font": "Formula1-Regular"},
+        "axis": {"font": "Formula1-Regular"},
+        "legend": {"font": "Formula1-Regular"}
     }
 }
 

@@ -1,10 +1,9 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 770,
-    "height": 390,
+    "width": 600,
+    "height": 340,
     "title": {
-        "text": "Circuits Formula 1 Raced On",
-        "frame": "bounds"
+        "text": "Circuits Formula 1 Raced On"
     },
     "params": 
     [
@@ -21,10 +20,10 @@
         },
         {
             "name": "zoom_level",
-            "value": 140,
+            "value": 110,
             "bind": {
                 "input": "range",
-                "min": 140,
+                "min": 110,
                 "max": 1500,
                 "step": 10,
                 "name": "Zoom: "
@@ -144,6 +143,7 @@
         }
     ],
     "config": {
-        "title": {"font": "Formula1-Bold" }
+        "title": {"font": "Formula1-Bold" },
+        "text": {"font": "Formula1-Regular"}
     }
 }
