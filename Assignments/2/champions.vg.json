@@ -26,8 +26,7 @@
         },
         {
             "name": "highlight",
-            "select": {"type": "point", "on": "mouseover", "fields": ["Driver"]},
-            "bind": "legend"
+            "select": {"type": "point", "on": "mouseover", "fields": ["Driver"]}
         },
         {"name": "select", "select": "point"}
     ],
@@ -44,22 +43,35 @@
                 {
                     "aggregate": [{"op": "count", "field": "Driver", "as": "Driver Titles"}],
                     "groupby": ["Driver"]
+                },
+                {
+                    "lookup": "driverId", "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/drivers.csv",
+                            "format": {
+                                "type": "csv",
+                                "parse": {"fullname": "string"}
+                            }
+                        },
+                        "key": "driverId",
+                        "fields": ["fullname"]
+                    }
                 }
             ],
             "layer": [
                 {
                     "mark": {
                         "type": "arc", 
-                        "innerRadius": 50,
+                        "innerRadius": 100,
                         "stroke": "black",
                         "cursor": "pointer"
                     },
                     "encoding": {
-                        "theta": {"field": "Titles", "type": "quantitative"},
+                        "theta": {"field": "Driver Titles", "type": "quantitative"},
                         "color": {"field": "Driver", "type": "nominal"},
                         "tooltip": [
                             {"field": "Driver", "type": "nominal", "title": "Driver"},
-                            {"field": "Titles", "type": "quantitative", "title": "Driver Titles"}
+                            {"field": "Driver Titles", "type": "quantitative", "title": "Driver Titles"}
                         ],
                         "opacity": {
                             "condition": [
@@ -81,7 +93,8 @@
                                 }
                             ],
                             "value": 0
-                        }
+                        },
+                        "legend": null
                     }
                 }
             ]
@@ -95,6 +108,7 @@
             },
             "transform": [
                 {"filter": "datum.Season >= min_year_selection && datum.Season <= max_year_selection" },
+                {"filter": "datum.Constructor != null"},
                 {
                     "aggregate": [{"op": "count", "field": "Constructor", "as": "Constructor Titles"}],
                     "groupby": ["Constructor"]
@@ -104,15 +118,15 @@
                 {
                     "mark": {
                         "type": "arc", 
-                        "innerRadius": 50,
+                        "innerRadius": 100,
                         "stroke": "black",
                         "cursor": "pointer"
                     },
                     "encoding": {
-                        "theta": {"field": "Titles", "type": "quantitative"},
-                        "color": {"field": "Driver", "type": "nominal"},
+                        "theta": {"field": "Constructor Titles", "type": "quantitative"},
+                        "color": {"field": "Constructor", "type": "nominal"},
                         "tooltip": [
-                            {"field": "Constructor", "type": "nominal", "title": "Driver"},
+                            {"field": "Constructor", "type": "nominal", "title": "Constructor"},
                             {"field": "Constructor Titles", "type": "quantitative", "title": "Titles"}
                         ],
                         "opacity": {
@@ -135,10 +149,14 @@
                                 }
                             ],
                             "value": 0
-                        }
+                        },
+                        "legend": null
                     }
                 }
             ]
         }
-    ]
+    ],
+    "config": {
+        "title": {"font": "Formula1-Bold" }
+    }
 }

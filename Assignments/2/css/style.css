@@ -27,31 +27,40 @@
 	src: url("Formula1-Wide.otf");
 }
 
-* {
-	font-family: "Formula1-Regular";
-}
-
 body {
 	background: url(/Assignments/2/css/carBackground.png);
 	background-repeat: repeat;
 }
 
-.wrapper {
+.main-wrapper {
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 100px;
 	margin-bottom: 100px;
-	background-color:whitesmoke
+	background-color:whitesmoke;
+	border-radius: 25px;
 }
 
 .title-wrapper {
 	font-family: "Formula1-Bold";
+	font-size: 25px;
 	color: white;
+	background-color: #FF1801;
+	text-align: center;
+	border-radius: 25px;
+}
+
+.body-wrapper {
+	font-family: "Formula1-Regular";
 }
 
 .vis-container {
     width: 100%;
-	margin: 2px;
+	top:100px;
+	bottom: 100px; 
+	left: 50px;
+	right: 50px;
+	background-color: whitesmoke;
 }
 
 .vis {

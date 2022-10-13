@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Bump chart",
+    "title": "Driver Standings Season Summary",
     "width": 300,
     "height": 300,
     "params": [
@@ -50,15 +50,15 @@
                     "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/drivers.csv",
                     "format": {
                         "type": "csv",
-                        "parse": {"forename": "string", "surname": "string"}
+                        "parse": {"fullname": "string"}
                     }
                 },
                 "key": "driverId",
-                "fields": ["forename", "surname"]
+                "fields": ["fullname"]
             }
         },
         {
-            "calculate": "datum.forename + ' ' + datum.surname", "as": "driver_fullname"
+            "calculate": "fullname", "as": "Driver"
         },
         {
             "sort": [
@@ -78,12 +78,12 @@
             "calculate": "toNumber(datum.position)", "as": "Position"
         }
     ],
-    "mark": {"type": "line", "orient": "vertical", "cornerRadius": 2},
+    "mark": {"type": "line", "orient": "vertical", "cornerRadius": 6 },
     "encoding": {
         "x": {"field": "Round", "type": "ordinal"},
         "y": {"field": "Position", "type": "ordinal"},
         "color": {
-            "field": "driver_fullname", "type": "nominal"
+            "field": "Driver", "type": "nominal"
         },
 
         "strokeWidth": {
@@ -103,15 +103,17 @@
         },
         
         "opacity": {
-            "condition": {"param": "highlight", "value": 0.6},
+            "condition": {"param": "highlight", "value": 0.8},
             "value": 0.2
         },
         "tooltip": [
-            {"field": "driver_fullname", "type": "nominal", "title": "Driver"},
+            {"field": "Driver", "type": "nominal", "title": "Driver"},
             {"field": "Position", "type": "ordinal", "title": "Position"},
             {"field": "points", "type": "quantitative", "title": "Points"}
         ]
-
+    },
+    "config": {
+        "title": {"font": "Formula1-Bold" }
     }
 }
 
