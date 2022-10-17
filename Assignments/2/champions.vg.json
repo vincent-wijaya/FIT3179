@@ -28,7 +28,7 @@
     "hconcat": [
         {
             "title": "World Driver's Champions",
-            "width": 400,
+            "width": 485,
             "height": 400,
             "data": {
                 "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/championships.csv"
@@ -57,43 +57,47 @@
                 {
                     "params": [
                         {
-                            "name": "highlight",
+                            "name": "driver_highlight",
                             "select": {"type": "point", "on": "mouseover", "fields": ["Driver"]}
                         },
                         {
-                            "name": "select", "select": "point"
+                            "name": "driver_select", "select": "point"
                         }
                     ],
                     "name": "Driver donut",
                     "mark": {
                         "type": "arc", 
                         "innerRadius": 100,
-                        "outerRadius": 200,
+                        "outerRadius": 180,
                         "stroke": "black",
                         "cursor": "pointer"
                     },
                     "encoding": {
                         "theta": {"field": "Driver Titles", "type": "quantitative", "stack": true},
-                        "color": {"field": "Driver", "type": "nominal", "stack": true},
+                        "color": {
+                            "field": "Driver", "type": "nominal"
+                        
+                        },
+                        "order": {"field": "Driver Titles"},
                         "tooltip": [
                             {"field": "Driver", "type": "nominal", "title": "Driver"},
                             {"field": "Driver Titles", "type": "quantitative", "title": "Driver Titles"}
                         ],
                         "opacity": {
                             "condition": [
-                                {"param": "select", "empty": false, "value": 0.8},
-                                {"param": "highlight", "value": 0.8}],
+                                {"param": "driver_select", "empty": false, "value": 0.8},
+                                {"param": "driver_highlight", "value": 0.8}],
                             "value": 0.2
                         },
                         "strokeWidth": {
                             "condition": [
                                 {
-                                    "param": "select",
+                                    "param": "driver_select",
                                     "empty": false,
                                     "value": 2
                                 },
                                 {
-                                    "param": "highlight",
+                                    "param": "driver_highlight",
                                     "empty": false,
                                     "value": 1
                                 }
@@ -106,29 +110,33 @@
                     "name": "Driver label",
                     "mark": {
                         "type": "text",
-                        "radius": 170
+                        "radius": 190
                     },
                     "encoding": {
-                        "theta": {
-                            "field": "Driver Titles", "type": "quantitative"
-                        },
                         "text": {
                             "field": "Driver Titles", "type": "quantitative"
                         }
                     }
                 }
-            ]
+            ],
+            "encoding": {
+                "theta": {"field": "Driver Titles", "type": "quantitative", "stack": true},
+                "color": {
+                    "field": "Driver", "type": "nominal"
+                
+                },
+                "order": {"field": "Driver Titles"}
+            }
         },
         {
             "title": "Constructor Champions",
-            "width": 400,
+            "width": 485,
             "height": 400,
             "data": {
                 "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/championships.csv"
             },
             "transform": [
-                {"filter": "datum.Season >= min_year_selection && datum.Season <= max_year_selection" },
-                {"filter": "isValid(datum.Constructor)"},
+                {"filter": "datum.Season >= min_year_selection && datum.Season <= max_year_selection && datum.Season >= 1958 && datum.Season <= 2021" },
                 {
                     "aggregate": [{"op": "count", "field": "Constructor", "as": "Constructor Titles"}],
                     "groupby": ["Constructor"]
@@ -138,42 +146,41 @@
                 {
                     "params": [
                         {
-                            "name": "highlight",
+                            "name": "constructor_highlight",
                             "select": {"type": "point", "on": "mouseover", "fields": ["Constructor"]}
                         },
                         {
-                            "name": "select", "select": "point"
+                            "name": "constructor_select", "select": "point"
                         }   
                     ],
                     "name": "Constructor donut",
                     "mark": {
                         "type": "arc", 
                         "innerRadius": 100,
+                        "outerRadius": 180,
                         "stroke": "white",
                         "cursor": "pointer"
                     },
                     "encoding": {
-                        "theta": {"field": "Constructor Titles", "type": "quantitative", "stack": true},
-                        "color": {"field": "Constructor", "type": "nominal", "stack": true},
                         "tooltip": [
                             {"field": "Constructor", "type": "nominal", "title": "Constructor"},
                             {"field": "Constructor Titles", "type": "quantitative", "title": "Titles"}
                         ],
                         "opacity": {
                             "condition": [
-                                {"param": "select", "empty": false, "value": 0.8},
-                                {"param": "highlight", "value": 0.8}],
+                                {"param": "constructor_select", "empty": false, "value": 0.8},
+                                {"param": "constructor_highlight", "value": 0.8}],
                             "value": 0.2
                         },
                         "strokeWidth": {
                             "condition": [
                                 {
-                                    "param": "select",
+                                    "param": "constructor_select",
                                     "empty": false,
                                     "value": 2
                                 },
                                 {
-                                    "param": "highlight",
+                                    "param": "constructor_highlight",
                                     "empty": false,
                                     "value": 1
                                 }
@@ -186,7 +193,7 @@
                     "name": "Constructor label",
                     "mark": {
                         "type": "text",
-                        "radiusOffset": 10
+                        "radius": 190
                     },
                     "encoding": {
                         "text": {
@@ -194,7 +201,12 @@
                         }
                     }
                 }
-            ]
+            ],
+            "encoding": {
+                "theta": {"field": "Constructor Titles", "type": "quantitative", "stack": true},
+                "color": {"field": "Constructor", "type": "nominal"},
+                "order": {"field": "Constructor Titles"}
+            }
         }
     ],
     "config": {
@@ -202,6 +214,8 @@
         "legend": {
             "disable": true
         },
-        "mark": {"invalid": null}
+        "mark": {"invalid": null},
+        "text": {"font": "Formula1-Regular"},
+        "font": "Formula1-Bold"
     }
 }

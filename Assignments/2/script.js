@@ -17,3 +17,8 @@ var driverChampions = "champions.vg.json";
 vegaEmbed("#champions", driverChampions).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
+
+var lapTimes = "lapTimes.vg.json";
+vegaEmbed("#lapTimes", lapTimes).then(function(result) {
+// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+}).catch(console.error);

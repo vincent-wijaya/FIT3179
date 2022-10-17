@@ -1,0 +1,195 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text": "Lap Times"},
+    "params": [
+      {
+        "name": "circuit_selection",
+        "value": "Melbourne",
+        "bind": {
+          "input": "select",
+          "options": 
+          [
+            "Abu Dhabi",
+            "Austin",
+            "Baku",
+            "Budapest",
+            "Buenos Aires",
+            "Hockenheim",
+            "Imola",
+            "Indianapolis",
+            "Istanbul",
+            "Jeddah",
+            "Kuala Lumpur",
+            "Le Castellet",
+            "Magny Cours",
+            "Marina Bay",
+            "Melbourne",
+            "Mexico City",
+            "Monte-Carlo",
+            "Montreal",
+            "Monza",
+            "Oyama",
+            "Sakhir",
+            "Shanghai",
+            "Silverstone",
+            "Sochi",
+            "Spa",
+            "Spielberg",
+            "Suzuka",
+            "Uttar Pradesh",
+            "Valencia",
+            "Yeongam County"
+          ],
+          "labels": 
+            ["Abu Dhabi",
+            "Austin",
+            "Baku",
+            "Budapest",
+            "Buenos Aires",
+            "Hockenheim",
+            "Imola",
+            "Indianapolis",
+            "Istanbul",
+            "Jeddah",
+            "Kuala Lumpur",
+            "Le Castellet",
+            "Magny Cours",
+            "Marina Bay",
+            "Melbourne",
+            "Mexico City",
+            "Monte-Carlo",
+            "Montreal",
+            "Monza",
+            "Oyama",
+            "Sakhir",
+            "Shanghai",
+            "Silverstone",
+            "Sochi",
+            "Spa",
+            "Spielberg",
+            "Suzuka",
+            "Uttar Pradesh",
+            "Valencia",
+            "Yeongam County"
+          ],
+          "name": "Location: "
+        }
+      }
+    ],
+    "data": {
+      "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/qualifying.csv"
+    },
+    "transform": [
+      {
+        "lookup": "raceId",
+        "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "year": "number",
+                "raceId": "number",
+                "circuitId": "number"
+              }
+            }
+          },
+          "key": "raceId",
+          "fields": ["year", "raceId", "circuitId"]
+        }
+      },
+      {
+        "lookup": "circuitId",
+        "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/circuits.csv",
+            "format": {
+              "type": "csv",
+              "parse": {"circuitRef": "string", "location": "string"}
+            }
+          },
+          "key": "circuitId",
+          "fields": ["circuitName", "location"]
+        }
+      },
+      {"filter": "datum.location == circuit_selection"},
+      {"calculate": "toNumber(datum.q1_milliseconds) / 60000", "as": "mins"},
+      {"filter": "datum.mins > 1"},
+      {"filter": "datum.mins <= 3"}
+    ],
+    "vconcat": [
+      {
+        "width": 950,
+        "layer": [
+          {
+            "mark": {"type": "point", "opacity": 0.1},
+            "encoding": {
+              "x": {
+                "field": "year",
+                "scale": {"domain": {"param": "brush"}
+                }
+              },
+              "y": {"field": "mins", "type": "quantitative"},
+              "color": {"value": "red"}
+            }
+            },
+            {
+                "mark": "line",
+                "encoding": {
+                    "x": {
+                        "field": "year", 
+                        "axis": {"title": ""},
+                        "scale": {"domain": {"param": "brush"}}},
+                    "y": {
+                        "aggregate": "min",
+                        "axis": {"title": "Lap Time, Fastest Lap Time (mins)"},
+                        "field": "mins",
+                        "scale": {
+                            "zero": false
+                        }
+                    },
+                    "color": {"value": "black"},
+                    "tooltip": [
+                            {"field": "year", "type": "quantitative", "title": "Year"},
+                            {"aggregate": "min", "field": "mins", "type": "quantitative", "title": "Fastest Qualifying Time (minutes)", "format": ".3r"}
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": 950,
+            "height": "container",
+            "mark": "point",
+            "params": [
+                {"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}
+            ],
+            "encoding": {
+                "x": 
+                {
+                    "field": "year", 
+                    "axis": {"title": "Year"}
+                },
+                "y": {
+                    "field": "mins",
+                    "type": "quantitative",
+                    "axis": {"tickCount": 3, "grid": false, "title": "Lap Time (mins)"}
+                },
+                "color": {
+                    "value": "red"
+                }
+            }
+        }
+    ],
+    "config": {
+      "title": {"font": "Formula1-Bold"},
+      "text": {"font": "Formula1-Regular"},
+      "axis": {"labelFont": "Formula1-Regular"},
+      "axisX": {
+          "labelAngle": -60,
+          "grid": true,
+          "gridOpacity": 0.3
+      },
+      "legend": {"labelFont": "Formula1-Regular"}
+    }
+  }

@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "Driver Standings Season Summary",
-    "width": 600,
-    "height": 300,
+    "width": 800,
+    "height": 500,
     "params": [
         {
             "name": "Year_selection",
@@ -26,11 +26,11 @@
                     "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/races.csv",
                     "format": {
                         "type": "csv",
-                        "parse": {"year": "number", "round": "number"}
+                        "parse": {"year": "number", "round": "number", "name": "string"}
                     }
                 },
                 "key": "raceId",
-                "fields":["year", "round"]
+                "fields":["year", "round", "name"]
             }
         },
         {
@@ -138,6 +138,8 @@
                     "value": 20
                 },
                 "tooltip": [
+                    {"field": "Round", "type": "ordinal", "title": "Round"},
+                    {"field": "name", "type": "nominal", "title": "Race Name"},
                     {"field": "Driver", "type": "nominal", "title": "Driver"},
                     {"field": "Position", "type": "ordinal", "title": "Position"},
                     {"field": "points", "type": "quantitative", "title": "Points"}
@@ -172,6 +174,8 @@
                     "value": 0.2
                 },
                 "tooltip": [
+                    {"field": "Round", "type": "ordinal", "title": "Round"},
+                    {"field": "name", "type": "nominal", "title": "Race Name"},
                     {"field": "Driver", "type": "nominal", "title": "Driver"},
                     {"field": "Position", "type": "ordinal", "title": "Position"},
                     {"field": "points", "type": "quantitative", "title": "Points"}
@@ -182,8 +186,14 @@
     "config": {
         "title": {"font": "Formula1-Bold" },
         "text": {"font": "Formula1-Regular"},
-        "axis": {"font": "Formula1-Regular"},
-        "legend": {"font": "Formula1-Regular"}
+        "axis": {"labelFont": "Formula1-Regular"},
+        "axisX": {
+            "labelAngle": 0,
+            "grid": true,
+            "gridOpacity": 0.3
+        },
+        "legend": {"labelFont": "Formula1-Regular"}
+
     }
 }
 
