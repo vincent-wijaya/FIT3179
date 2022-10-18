@@ -1,4 +1,4 @@
-var circuitsMap = "circuitsMap.vg.json";
+var circuitsMap = "js/circuitsMap.vg.json";
 vegaEmbed("#circuitsMap", circuitsMap).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
@@ -8,17 +8,17 @@ vegaEmbed("#circuitsMap", circuitsMap).then(function(result) {
 // // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);
 
-var standings = "standings.vg.json";
+var standings = "js/standings.vg.json";
 vegaEmbed("#standings", standings).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
 
-var driverChampions = "champions.vg.json";
+var driverChampions = "js/champions.vg.json";
 vegaEmbed("#champions", driverChampions).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
 
-var lapTimes = "lapTimes.vg.json";
+var lapTimes = "js/lapTimes.vg.json";
 vegaEmbed("#lapTimes", lapTimes).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);

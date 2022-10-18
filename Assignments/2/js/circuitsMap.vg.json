@@ -60,14 +60,14 @@
         },
         {
             "data": {
-                "url": "data/ne_110_satellite.json",
+                "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/js/ne_110_satellite.json",
                 "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
             },
             "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.7}
         },
         {
             "data": {
-                "url": "data/ne_110.json",
+                "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/js/ne_110.json",
                 "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
             },
             "mark": {"type": "geoshape", "stroke": "black", "fill": null},
@@ -75,8 +75,8 @@
         },
         {
             "data": {
-                "url": "data/ne_1.json",
-                "format": {"type": "topojson", "feature": "ne_10m_wgs84_bounding_box"}
+                "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/js/ne_110m_wgs84_bounding_box.json",
+                "format": {"type": "topojson", "feature": "ne_110m_wgs84_bounding_box"}
             },
             "mark": {"type": "geoshape", "stroke": "black", "fill": "black"},
             "encoding": {"opacity": {"value": 0.2}}
