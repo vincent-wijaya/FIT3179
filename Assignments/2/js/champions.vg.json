@@ -27,8 +27,8 @@
     ],
     "hconcat": [
         {
-            "title": "World Driver's Champions",
-            "width": 485,
+            "title": "World Drivers' Champions",
+            "width": 475,
             "height": 400,
             "data": {
                 "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/championships.csv"
@@ -129,8 +129,8 @@
             }
         },
         {
-            "title": "Constructor Champions",
-            "width": 485,
+            "title": "World Constructors' Champions",
+            "width": 475,
             "height": 400,
             "data": {
                 "url": "https://raw.githubusercontent.com/vincent-wijaya/FIT3179/main/Assignments/2/data/championships.csv"

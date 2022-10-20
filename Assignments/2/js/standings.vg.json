@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "Driver Standings Season Summary",
-    "width": 800,
+    "width": 790,
     "height": 500,
     "params": [
         {

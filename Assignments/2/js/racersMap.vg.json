@@ -4,20 +4,6 @@
     "height": 700,
     "title": "Circuits Formula 1 Raced On In " ,
     "projection": {"type": "naturalEarth1"},
-    "params": [
-      {
-          "name": "Year_selection",
-          "value": 2022,
-          "bind": {
-              "input": "range",
-              "min": 1950,
-              "max": 2022,
-              "step": 1,
-              "name": "Year: "
-          }
-      }   
-  
-    ],
     "layer": [
       {
         "data": {

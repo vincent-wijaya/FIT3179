@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 1000,
+    "width": 980,
     "height": 500,
     "title": {
         "text": "Circuits Formula 1 Raced On"
