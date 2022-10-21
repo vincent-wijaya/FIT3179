@@ -173,7 +173,10 @@
                 "y": {
                     "field": "mins",
                     "type": "quantitative",
-                    "axis": {"tickCount": 3, "grid": false, "title": "Lap Time (mins)"}
+                    "axis": {"tickCount": 3, "grid": false, "title": "Lap Time (mins)"},
+                    "scale": {
+                      "zero" :false
+                    }
                 },
                 "color": {
                     "value": "red"
