@@ -133,7 +133,8 @@
                 {
                     "mark": {
                         "type": "text",
-                        "dy": -10,
+                        "dx": 20,
+                        "dy": -7,
                         "fontWeight": "bold"
                     },
                     "encoding": {
